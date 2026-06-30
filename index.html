@@ -5,62 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gods Above — Rpg de Grandes stratégie entre amis</title>
 
-  <!--
-  ═══════════════════════════════════════════════════════════════════
-  GODS ABOVE — SITE RPG — NOTES POUR DÉVELOPPEUR / LLM
-  ═══════════════════════════════════════════════════════════════════
-
-  STRUCTURE ACTUELLE :
-  - index.html         → Page d'entrée (ce fichier)
-  - #screen-loading    → Écran de chargement avec particules et sceau
-  - #page-main         → Page principale (hero, nav, sections)
-  - #modal-lore        → Modal du contexte/lore
-  - #modal-login       → Modal connexion/compte utilisateur
-  - #modal-shop        → Modal boutique
-  - #modal-calendar    → Modal calendrier chronologique interactif
-  - #music-player      → Lecteur musical (bas droite)
-
-  PAGES À CRÉER (liens prêts dans la nav) :
-  - monde.html         → Monde & Lieux
-  - personnages.html   → Personnages & Factions
-  - magie.html         → Magie & Systèmes
-  - race.html          → Race & Lignées
-  - chronologie.html   → Chronologie & Histoire (version full page)
-
-  SYSTÈME DE COMPTES :
-  - La section login est actuellement en UI statique (demo)
-  - Pour l'activer : brancher un backend (Node/Supabase/Firebase)
-  - Les champs sont déjà structurés avec id="input-email", id="input-password"
-  - Le bouton de connexion a id="btn-login"
-
-  BOUTIQUE :
-  - UI statique demo avec 3 articles placeholder
-  - Pour étendre : ajouter des items dans .shop-grid avec classe .shop-item
-
-  MUSIQUE :
-  - Liste de pistes dans const PLAYLIST (JS, bas du fichier)
-  - Remplacer les src par des vrais fichiers audio ou URLs
-  - Le lecteur est #music-player (fixed, bas droite)
-
-  CALENDRIER CHRONOLOGIQUE :
-  - 5 ères définies dans const ERAS (JS, bas du fichier)
-  - Chaque ère a : name, range, color, events[]
-  - Pour ajouter une ère ou un événement, éditer ERAS
-
-  PALETTES & TOKENS :
-  --gold: #C9A84C
-  --gold-light: #E8C96A
-  --dark: #0A0B0F
-  --panel: #12131A
-  --panel-2: #1E1F28
-  --text: #E8DFC7
-  --text-muted: #8FA8C0
-  --accent: #8FA8C0
-
-  FONTS : Cinzel (titres), Raleway (corps) — Google Fonts
-  ═══════════════════════════════════════════════════════════════════
-  -->
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet" />
 
@@ -91,7 +35,6 @@
     }
     ::selection { background: var(--gold-dim); color: var(--text); }
 
-    /* ─── SCROLLBAR ─── */
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: var(--dark); }
     ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 3px; }
@@ -134,7 +77,6 @@
       transform-origin: center;
       transform-box: fill-box;
     }
-
     @keyframes rotateSeal { to { transform: rotate(360deg); } }
 
     .loading-title {
@@ -234,7 +176,6 @@
         #0A0B0F;
     }
 
-    /* Star field */
     .hero-stars {
       position: absolute; inset: 0;
       background-image:
@@ -333,7 +274,6 @@
       background: rgba(201,168,76,0.06);
     }
 
-    /* Scroll indicator */
     .hero-scroll {
       position: absolute;
       bottom: 32px; left: 50%;
@@ -415,7 +355,7 @@
     }
     .nav-btn-fill:hover { background: var(--gold-light); }
 
-    /* ─── SECTION: LORE PREVIEW ─── */
+    /* ─── SECTION ─── */
     .section {
       padding: 100px 48px;
       max-width: 1280px;
@@ -439,7 +379,6 @@
     }
     .section-title em { color: var(--gold); font-style: normal; }
 
-    /* Lore cards */
     .lore-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -491,7 +430,6 @@
       text-transform: uppercase;
     }
 
-    /* ─── SECTION: CHRONOLOGIE PREVIEW ─── */
     .era-timeline {
       display: flex;
       gap: 0;
@@ -536,7 +474,6 @@
     }
     .era-item:hover .era-name { color: var(--gold); }
 
-    /* ─── DIVIDER ─── */
     .divider {
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--border), transparent);
@@ -587,7 +524,6 @@
 
     .modal-body { padding: 40px; }
 
-    /* LORE MODAL */
     .lore-text {
       font-size: 0.95rem;
       line-height: 1.95;
@@ -598,7 +534,6 @@
     .lore-text p:last-child { margin-bottom: 0; }
     .lore-text strong { color: var(--gold); font-weight: 600; }
 
-    /* LOGIN MODAL */
     .auth-tabs {
       display: flex; gap: 0;
       border-bottom: 1px solid var(--border);
@@ -664,7 +599,6 @@
       letter-spacing: 0.2em;
     }
 
-    /* SHOP MODAL */
     .modal-shop { max-width: 900px; }
     .shop-grid {
       display: grid;
@@ -706,7 +640,6 @@
       color: var(--gold);
     }
 
-    /* CALENDAR MODAL */
     .modal-calendar { max-width: 960px; }
     .calendar-eras {
       display: flex;
@@ -731,9 +664,7 @@
       color: var(--dark);
       border-color: var(--gold);
     }
-    .cal-era-content {
-      min-height: 300px;
-    }
+    .cal-era-content { min-height: 300px; }
     .cal-era-header {
       margin-bottom: 24px;
       padding-bottom: 16px;
@@ -757,9 +688,7 @@
       margin-bottom: 24px;
       font-weight: 300;
     }
-    .cal-events {
-      display: flex; flex-direction: column; gap: 12px;
-    }
+    .cal-events { display: flex; flex-direction: column; gap: 12px; }
     .cal-event {
       display: flex; gap: 20px; align-items: flex-start;
       padding: 16px 20px;
@@ -776,20 +705,9 @@
       flex-shrink: 0;
       min-width: 80px;
     }
-    .cal-event-text {
-      font-size: 0.85rem;
-      line-height: 1.6;
-      color: var(--text);
-    }
-    .cal-event-title {
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 2px;
-    }
-    .cal-event-desc {
-      color: var(--text-muted);
-      font-size: 0.8rem;
-    }
+    .cal-event-text { font-size: 0.85rem; line-height: 1.6; color: var(--text); }
+    .cal-event-title { font-weight: 600; color: var(--text); margin-bottom: 2px; }
+    .cal-event-desc { color: var(--text-muted); font-size: 0.8rem; }
 
     /* ════════════════════════════════════════
        MUSIC PLAYER
@@ -845,10 +763,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    .music-artist {
-      font-size: 0.7rem;
-      color: var(--text-muted);
-    }
+    .music-artist { font-size: 0.7rem; color: var(--text-muted); }
 
     .music-controls {
       display: flex; align-items: center; justify-content: center;
@@ -888,11 +803,7 @@
       width: 0%;
       transition: width 0.3s linear;
     }
-    .music-time {
-      font-size: 0.6rem;
-      color: var(--text-muted);
-      flex-shrink: 0;
-    }
+    .music-time { font-size: 0.6rem; color: var(--text-muted); flex-shrink: 0; }
 
     .music-volume {
       padding: 8px 16px;
@@ -904,16 +815,9 @@
       background: var(--border);
       cursor: pointer;
     }
-    .music-vol-fill {
-      height: 100%;
-      background: var(--gold-dim);
-      width: 70%;
-    }
+    .music-vol-fill { height: 100%; background: var(--gold-dim); width: 70%; }
 
-    .music-playlist {
-      max-height: 160px;
-      overflow-y: auto;
-    }
+    .music-playlist { max-height: 160px; overflow-y: auto; }
     .music-playlist-item {
       padding: 8px 16px;
       font-size: 0.75rem;
@@ -928,6 +832,171 @@
     .music-playlist-item:hover { color: var(--gold); background: rgba(201,168,76,0.04); }
     .music-playlist-item.active { color: var(--gold); }
 
+    /* ════════════════════════════════════════
+       WIDGET SOLEIL / LUNE — BAS GAUCHE
+    ════════════════════════════════════════ */
+    #ga-widget {
+      position: fixed;
+      bottom: 24px; left: 24px;
+      z-index: 200;
+      display: flex; flex-direction: column;
+      align-items: flex-start;
+    }
+
+    #ga-orb {
+      width: 48px;
+      height: 48px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1px;
+      transition: border-color 0.2s, background 0.2s;
+      position: relative;
+    }
+    #ga-orb:hover { border-color: var(--gold); background: var(--panel-2); }
+
+    #ga-orb-icon { font-size: 1.2rem; line-height: 1; }
+
+    /* Panel calendrier fictif */
+    #ga-panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      width: 300px;
+      margin-bottom: 8px;
+      display: none;
+      flex-direction: column;
+    }
+    #ga-panel.open { display: flex; }
+
+    .ga-panel-header {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .ga-realtime {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .ga-real-icon { font-size: 1.4rem; }
+    .ga-real-info {}
+    .ga-real-clock {
+      font-family: 'Cinzel', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 0.1em;
+      line-height: 1;
+    }
+    .ga-real-date-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-top: 3px;
+      font-family: 'Raleway', sans-serif;
+    }
+
+    .ga-fictive-block {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .ga-fictive-label {
+      font-size: 0.55rem;
+      letter-spacing: 0.3em;
+      color: var(--gold-dim);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      font-family: 'Raleway', sans-serif;
+    }
+    .ga-fictive-date {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+    }
+    .ga-fictive-sub {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+      letter-spacing: 0.1em;
+      font-family: 'Raleway', sans-serif;
+    }
+
+    /* Mini calendrier dans le panel */
+    .ga-mini-cal-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px 6px;
+    }
+    .ga-mini-nav-btn {
+      background: none;
+      border: none;
+      color: var(--gold);
+      font-size: 0.75rem;
+      cursor: pointer;
+      padding: 2px 6px;
+      transition: color 0.2s;
+    }
+    .ga-mini-nav-btn:hover { color: var(--gold-light); }
+    .ga-mini-month-name {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      color: var(--text);
+      text-align: center;
+    }
+
+    .ga-mini-grid {
+      width: calc(100% - 32px);
+      margin: 0 16px 12px;
+      border-collapse: collapse;
+    }
+    .ga-mini-grid th {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      text-align: center;
+      padding: 4px 0 6px;
+    }
+    .ga-mini-grid td { text-align: center; padding: 1px; }
+    .ga-mini-day {
+      width: 28px; height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.7rem;
+      color: var(--text);
+      border-radius: 50%;
+    }
+    .ga-mini-day.empty { color: transparent; }
+    .ga-mini-day.today {
+      background: var(--gold);
+      color: var(--dark);
+      font-weight: 700;
+    }
+    .ga-mini-day.weekend { color: rgba(201,168,76,0.65); }
+    .ga-mini-day.today.weekend { color: var(--dark); }
+
     /* ─── FOOTER ─── */
     .footer {
       border-top: 1px solid var(--border);
@@ -941,9 +1010,7 @@
       letter-spacing: 0.25em;
       color: var(--gold-dim);
     }
-    .footer-links {
-      display: flex; gap: 24px; list-style: none;
-    }
+    .footer-links { display: flex; gap: 24px; list-style: none; }
     .footer-links a {
       font-size: 0.65rem;
       letter-spacing: 0.2em;
@@ -953,11 +1020,7 @@
       transition: color 0.2s;
     }
     .footer-links a:hover { color: var(--gold); }
-    .footer-copy {
-      font-size: 0.6rem;
-      color: var(--text-muted);
-      opacity: 0.5;
-    }
+    .footer-copy { font-size: 0.6rem; color: var(--text-muted); opacity: 0.5; }
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
@@ -984,34 +1047,27 @@
   <canvas id="loading-canvas"></canvas>
 
   <div class="loading-seal">
-    <!-- Sceau SVG animé -->
     <svg class="seal-svg" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Anneau extérieur rotatif -->
       <g class="seal-ring">
         <circle cx="80" cy="80" r="72" stroke="#C9A84C" stroke-width="0.5" stroke-dasharray="4 8" opacity="0.6"/>
         <circle cx="80" cy="80" r="65" stroke="#C9A84C" stroke-width="0.3" opacity="0.3"/>
-        <!-- Marques -->
         <line x1="80" y1="8" x2="80" y2="16" stroke="#C9A84C" stroke-width="1.5" opacity="0.8"/>
         <line x1="152" y1="80" x2="144" y2="80" stroke="#C9A84C" stroke-width="1.5" opacity="0.8"/>
         <line x1="80" y1="152" x2="80" y2="144" stroke="#C9A84C" stroke-width="1.5" opacity="0.8"/>
         <line x1="8" y1="80" x2="16" y2="80" stroke="#C9A84C" stroke-width="1.5" opacity="0.8"/>
       </g>
-      <!-- Anneau intérieur contra-rotatif -->
       <g style="animation: rotateSeal 5s linear infinite reverse; transform-origin:80px 80px;">
         <circle cx="80" cy="80" r="54" stroke="#C9A84C" stroke-width="0.5" stroke-dasharray="2 6" opacity="0.5"/>
       </g>
-      <!-- Étoile centrale -->
       <g opacity="0.9">
         <path d="M80 42 L84.7 68.5 L80 72 L75.3 68.5 Z" fill="#C9A84C" opacity="0.7"/>
         <path d="M80 118 L84.7 91.5 L80 88 L75.3 91.5 Z" fill="#C9A84C" opacity="0.7"/>
         <path d="M42 80 L68.5 75.3 L72 80 L68.5 84.7 Z" fill="#C9A84C" opacity="0.7"/>
         <path d="M118 80 L91.5 75.3 L88 80 L91.5 84.7 Z" fill="#C9A84C" opacity="0.7"/>
-        <!-- Diagonales -->
         <path d="M57.4 57.4 L72.8 72.8 L72 80 L65.5 73.5 Z" fill="#C9A84C" opacity="0.4"/>
         <path d="M102.6 57.4 L87.2 72.8 L88 80 L94.5 73.5 Z" fill="#C9A84C" opacity="0.4"/>
         <path d="M57.4 102.6 L72.8 87.2 L72 80 L65.5 86.5 Z" fill="#C9A84C" opacity="0.4"/>
         <path d="M102.6 102.6 L87.2 87.2 L88 80 L94.5 86.5 Z" fill="#C9A84C" opacity="0.4"/>
-        <!-- Cercle central -->
         <circle cx="80" cy="80" r="10" fill="none" stroke="#C9A84C" stroke-width="1"/>
         <circle cx="80" cy="80" r="4" fill="#C9A84C"/>
       </g>
@@ -1040,8 +1096,7 @@
   <nav class="site-nav">
     <a href="#" class="nav-logo">GODS ABOVE</a>
     <ul class="nav-links">
-      <!-- Pour ajouter des pages : dupliquer un <li> et modifier href + texte -->
-      <li><a href="monde.html">Monde & Lieux</a></li>
+      <li><a href="monde.html">Monde &amp; Lieux</a></li>
       <li><a href="personnages.html">Personnages</a></li>
       <li><a href="magie.html">Magie</a></li>
       <li><a href="race.html">Race</a></li>
@@ -1086,34 +1141,33 @@
     <h2 class="section-title">Un monde né des <em>cendres</em><br/>d'une civilisation oubliée</h2>
 
     <div class="lore-grid">
-      <!-- Pour ajouter une catégorie : dupliquer .lore-card -->
       <a href="monde.html" class="lore-card">
         <div class="lore-card-icon">🌍</div>
-        <div class="lore-card-title">Monde & Lieux</div>
+        <div class="lore-card-title">Monde &amp; Lieux</div>
         <p class="lore-card-desc">Royaumes, cités-états, ruines technologiques et territoires sauvages façonnés par mille ans d'oubli et de magie naissante.</p>
         <div class="lore-card-arrow">Explorer →</div>
       </a>
       <a href="personnages.html" class="lore-card">
         <div class="lore-card-icon">⚜️</div>
-        <div class="lore-card-title">Personnages & Factions</div>
+        <div class="lore-card-title">Personnages &amp; Factions</div>
         <p class="lore-card-desc">Les Neo Gods reveillés, les cultes qui les vénèrent, les factions qui les craignent. Chaque faction a ses propres ambitions.</p>
         <div class="lore-card-arrow">Rencontrer →</div>
       </a>
       <a href="magie.html" class="lore-card">
         <div class="lore-card-icon">✦</div>
-        <div class="lore-card-title">Magie & Systèmes</div>
+        <div class="lore-card-title">Magie &amp; Systèmes</div>
         <p class="lore-card-desc">Issue de siècles de pollution chimique et radioactive, la magie imprègne tout — et les dormants en sont saturés.</p>
         <div class="lore-card-arrow">Comprendre →</div>
       </a>
       <a href="race.html" class="lore-card">
         <div class="lore-card-icon">🐺</div>
-        <div class="lore-card-title">Race & Lignées</div>
+        <div class="lore-card-title">Race &amp; Lignées</div>
         <p class="lore-card-desc">Humains, dormants éveillés et créatures façonnées par la magie naissante — chaque race porte les marques de mille ans de mutation.</p>
         <div class="lore-card-arrow">Découvrir →</div>
       </a>
       <a href="chronologie.html" class="lore-card">
         <div class="lore-card-icon">📜</div>
-        <div class="lore-card-title">Chronologie & Histoire</div>
+        <div class="lore-card-title">Chronologie &amp; Histoire</div>
         <p class="lore-card-desc">De l'Ancienne Ère à la Nouvelle Aube — cinq époques qui ont redessiné les contours d'un monde que personne ne reconnaît plus.</p>
         <div class="lore-card-arrow">Traverser →</div>
       </a>
@@ -1122,7 +1176,7 @@
 
   <div class="divider"></div>
 
-  <!-- SECTION: CHRONOLOGIE APERÇU -->
+  <!-- SECTION: CHRONOLOGIE -->
   <section class="section">
     <div class="section-eyebrow">Les Grandes Époques</div>
     <h2 class="section-title">Cinq ères. Un seul fil.</h2>
@@ -1167,7 +1221,7 @@
 
 
 <!-- ════════════════════════════════════
-     MODAL: LORE / CONTEXTE
+     MODAL: LORE
 ════════════════════════════════════ -->
 <div class="modal-overlay" id="modal-lore" onclick="closeModalOverlay(event, 'modal-lore')">
   <div class="modal">
@@ -1189,7 +1243,7 @@
 </div>
 
 <!-- ════════════════════════════════════
-     MODAL: CONNEXION / COMPTE
+     MODAL: CONNEXION
 ════════════════════════════════════ -->
 <div class="modal-overlay" id="modal-login" onclick="closeModalOverlay(event, 'modal-login')">
   <div class="modal">
@@ -1201,14 +1255,8 @@
       <div class="auth-tabs">
         <button class="auth-tab active" onclick="switchTab('tab-login', this)">Connexion</button>
         <button class="auth-tab" onclick="switchTab('tab-register', this)">Créer un compte</button>
-        <!--
-          Pour ajouter des onglets (ex: "Profil", "Inventaire") :
-          1. Ajouter un bouton .auth-tab ici
-          2. Ajouter un div.tab-panel avec id correspondant en dessous
-        -->
       </div>
 
-      <!-- LOGIN TAB -->
       <div id="tab-login" class="tab-panel">
         <div class="form-group">
           <label class="form-label" for="input-email">Adresse Email</label>
@@ -1218,11 +1266,6 @@
           <label class="form-label" for="input-password">Mot de Passe</label>
           <input class="form-input" type="password" id="input-password" placeholder="••••••••"/>
         </div>
-        <!--
-          BACKEND CONNEXION :
-          Remplacer onclick par un appel fetch() vers votre API d'authentification
-          Ex: fetch('/api/auth/login', { method: 'POST', body: JSON.stringify({email, password}) })
-        -->
         <button class="form-submit" id="btn-login" onclick="handleLogin()">Se Connecter</button>
         <div class="form-divider">— ou —</div>
         <button class="form-submit" style="background:var(--panel-2); color:var(--text-muted); border:1px solid var(--border);">
@@ -1230,7 +1273,6 @@
         </button>
       </div>
 
-      <!-- REGISTER TAB -->
       <div id="tab-register" class="tab-panel" style="display:none;">
         <div class="form-group">
           <label class="form-label" for="reg-username">Nom du Joueur</label>
@@ -1256,16 +1298,10 @@
 <div class="modal-overlay" id="modal-shop" onclick="closeModalOverlay(event, 'modal-shop')">
   <div class="modal modal-shop">
     <div class="modal-header">
-      <span class="modal-title">Boutique — Artéfacts & Reliques</span>
+      <span class="modal-title">Boutique — Artéfacts &amp; Reliques</span>
       <button class="modal-close" onclick="closeModal('modal-shop')">✕</button>
     </div>
     <div class="modal-body">
-      <!--
-        BOUTIQUE :
-        Pour ajouter des articles, dupliquer un .shop-item et modifier le contenu.
-        Pour un vrai système de paiement : brancher Stripe ou un équivalent.
-        Le panier peut être géré en localStorage ou via un backend.
-      -->
       <div class="shop-grid" id="shop-grid">
         <div class="shop-item">
           <div class="shop-item-img">⚡</div>
@@ -1318,18 +1354,14 @@
       <button class="modal-close" onclick="closeModal('modal-calendar')">✕</button>
     </div>
     <div class="modal-body">
-      <div class="calendar-eras" id="calendar-eras">
-        <!-- Généré dynamiquement par JS -->
-      </div>
-      <div class="cal-era-content" id="cal-era-content">
-        <!-- Généré dynamiquement par JS -->
-      </div>
+      <div class="calendar-eras" id="calendar-eras"></div>
+      <div class="cal-era-content" id="cal-era-content"></div>
     </div>
   </div>
 </div>
 
 <!-- ════════════════════════════════════
-     LECTEUR MUSICAL
+     LECTEUR MUSICAL — BAS DROITE
 ════════════════════════════════════ -->
 <div id="music-player">
   <div class="music-panel" id="music-panel">
@@ -1356,11 +1388,59 @@
         <div class="music-vol-fill" id="music-vol-fill"></div>
       </div>
     </div>
-    <div class="music-playlist" id="music-playlist">
-      <!-- Généré dynamiquement -->
-    </div>
+    <div class="music-playlist" id="music-playlist"></div>
   </div>
   <button class="music-toggle" onclick="toggleMusicPanel()" title="Musique">♬</button>
+</div>
+
+<!-- ════════════════════════════════════
+     WIDGET SOLEIL / LUNE — BAS GAUCHE
+════════════════════════════════════ -->
+<div id="ga-widget">
+  <div id="ga-panel">
+    <div class="ga-panel-header">
+      <span>Calendrier — An 7060</span>
+      <button style="background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:0.9rem;padding:0 2px;" onclick="toggleGaPanel()">✕</button>
+    </div>
+
+    <!-- Heure réelle -->
+    <div class="ga-realtime">
+      <div class="ga-real-icon" id="ga-real-icon">☀️</div>
+      <div class="ga-real-info">
+        <div class="ga-real-clock" id="ga-real-clock">00:00:00</div>
+        <div class="ga-real-date-label" id="ga-real-date-label">—</div>
+      </div>
+    </div>
+
+    <!-- Date fictive -->
+    <div class="ga-fictive-block">
+      <div class="ga-fictive-label">Dans l'univers Gods Above</div>
+      <div class="ga-fictive-date" id="ga-fictive-date">—</div>
+      <div class="ga-fictive-sub" id="ga-fictive-sub">—</div>
+    </div>
+
+    <!-- Mini calendrier -->
+    <div class="ga-mini-cal-nav">
+      <button class="ga-mini-nav-btn" onclick="gaMiniNav(-1)">◂</button>
+      <div class="ga-mini-month-name" id="ga-mini-month-name">—</div>
+      <button class="ga-mini-nav-btn" onclick="gaMiniNav(1)">▸</button>
+    </div>
+    <table class="ga-mini-grid">
+      <thead>
+        <tr>
+          <th>Lu</th><th>Ma</th><th>Me</th><th>Je</th><th>Ve</th>
+          <th style="color:rgba(201,168,76,0.6)">Sa</th>
+          <th style="color:rgba(201,168,76,0.6)">Di</th>
+        </tr>
+      </thead>
+      <tbody id="ga-mini-body"></tbody>
+    </table>
+  </div>
+
+  <!-- Bouton orbe -->
+  <div id="ga-orb" onclick="toggleGaPanel()" title="Calendrier Gods Above">
+    <div id="ga-orb-icon">☀️</div>
+  </div>
 </div>
 
 
@@ -1370,9 +1450,6 @@
 <script>
 /* ═══════════════════════════════════════════════════════
    DONNÉES — CHRONOLOGIE
-   Pour modifier ou ajouter une ère, éditer ce tableau.
-   Chaque ère a : name, range, description, events[]
-   Chaque événement : year (string), title, desc
 ═══════════════════════════════════════════════════════ */
 const ERAS = [
   {
@@ -1431,10 +1508,6 @@ const ERAS = [
 
 /* ═══════════════════════════════════════════════════════
    DONNÉES — PLAYLIST
-   Remplacer les src par de vrais fichiers audio ou URLs.
-   Format : { title, artist, src }
-   Vous pouvez utiliser des fichiers locaux (./music/track.mp3)
-   ou des URLs externes.
 ═══════════════════════════════════════════════════════ */
 const PLAYLIST = [
   { title: "Éveil Millénaire",       artist: "Gods Above OST", src: "" },
@@ -1449,7 +1522,6 @@ let loadingDone = false;
 const enterBtn = document.getElementById('enter-btn');
 const loadingPct = document.getElementById('loading-pct');
 
-// Simulation du chargement
 let pct = 0;
 const loadInterval = setInterval(() => {
   pct += Math.random() * 4 + 1;
@@ -1457,9 +1529,7 @@ const loadInterval = setInterval(() => {
     pct = 100;
     clearInterval(loadInterval);
     loadingDone = true;
-    setTimeout(() => {
-      enterBtn.classList.add('ready');
-    }, 600);
+    setTimeout(() => { enterBtn.classList.add('ready'); }, 600);
   }
   loadingPct.textContent = Math.floor(pct) + '%';
 }, 60);
@@ -1484,7 +1554,6 @@ function resizeCanvas() {
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
 
-// Créer des particules d'énergie
 for (let i = 0; i < 120; i++) {
   const angle = Math.random() * Math.PI * 2;
   const radius = 150 + Math.random() * 300;
@@ -1503,13 +1572,11 @@ function animateParticles() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   const cx = canvas.width / 2;
   const cy = canvas.height / 2;
-
   particles.forEach(p => {
     p.x += p.vx + (- p.x * 0.0002);
     p.y += p.vy + (- p.y * 0.0002);
     p.life += 0.005;
     if (p.life > 1) p.life = 0;
-
     const alpha = Math.sin(p.life * Math.PI) * 0.6;
     ctx.beginPath();
     ctx.arc(cx + p.x, cy + p.y, p.size, 0, Math.PI * 2);
@@ -1518,7 +1585,6 @@ function animateParticles() {
       : `rgba(143,168,192,${alpha * 0.5})`;
     ctx.fill();
   });
-
   requestAnimationFrame(animateParticles);
 }
 animateParticles();
@@ -1544,20 +1610,17 @@ function switchTab(tabId, btn) {
   btn.classList.add('active');
 }
 
-/* ─── AUTH HANDLERS (statiques — brancher un backend ici) ─── */
 function handleLogin() {
   const email = document.getElementById('input-email').value;
   const pwd = document.getElementById('input-password').value;
   if (!email || !pwd) { alert('Veuillez remplir tous les champs.'); return; }
-  // TODO: fetch('/api/auth/login', { method:'POST', body: JSON.stringify({email, password:pwd}) })
   alert('Fonctionnalité de connexion à brancher sur votre backend.');
 }
 function handleRegister() {
-  // TODO: fetch('/api/auth/register', { ... })
   alert('Fonctionnalité d\'inscription à brancher sur votre backend.');
 }
 
-/* ─── CALENDRIER ─── */
+/* ─── CALENDRIER CHRONOLOGIQUE ─── */
 let currentEraIndex = 0;
 
 function buildCalendar() {
@@ -1572,7 +1635,6 @@ function openCalendar(eraIndex) {
   openModal('modal-calendar');
   buildCalendar();
   renderEra(eraIndex);
-  // Update active btn
   document.querySelectorAll('.cal-era-btn').forEach((btn, i) => {
     btn.classList.toggle('active', i === eraIndex);
   });
@@ -1601,16 +1663,10 @@ function renderEra(idx) {
   `;
 }
 
-// Init calendrier au clic nav
-document.getElementById('modal-calendar').addEventListener('click', function() {});
 buildCalendar();
-// Re-build quand modal s'ouvre pour s'assurer que les boutons existent
 document.querySelectorAll('[onclick*="modal-calendar"]').forEach(el => {
   el.addEventListener('click', () => {
-    setTimeout(() => {
-      buildCalendar();
-      renderEra(currentEraIndex);
-    }, 10);
+    setTimeout(() => { buildCalendar(); renderEra(currentEraIndex); }, 10);
   });
 });
 
@@ -1619,7 +1675,6 @@ let audio = new Audio();
 let currentTrack = 0;
 let isPlaying = false;
 let volumeLevel = 0.7;
-
 audio.volume = volumeLevel;
 
 function buildPlaylist() {
@@ -1642,36 +1697,25 @@ function loadTrack(idx) {
 }
 
 function togglePlay() {
-  if (!audio.src || audio.src === window.location.href) {
-    loadTrack(currentTrack);
-  }
+  if (!audio.src || audio.src === window.location.href) { loadTrack(currentTrack); }
   if (isPlaying) {
     audio.pause();
     document.getElementById('btn-play').textContent = '▶';
   } else {
-    audio.play().catch(() => {
-      document.getElementById('music-track-name').textContent = '⚠ Aucun fichier audio';
-    });
+    audio.play().catch(() => { document.getElementById('music-track-name').textContent = '⚠ Aucun fichier audio'; });
     document.getElementById('btn-play').textContent = '⏸';
   }
   isPlaying = !isPlaying;
 }
 
-function nextTrack() {
-  loadTrack((currentTrack + 1) % PLAYLIST.length);
-  if (isPlaying) audio.play().catch(() => {});
-}
-function prevTrack() {
-  loadTrack((currentTrack - 1 + PLAYLIST.length) % PLAYLIST.length);
-  if (isPlaying) audio.play().catch(() => {});
-}
+function nextTrack() { loadTrack((currentTrack + 1) % PLAYLIST.length); if (isPlaying) audio.play().catch(() => {}); }
+function prevTrack() { loadTrack((currentTrack - 1 + PLAYLIST.length) % PLAYLIST.length); if (isPlaying) audio.play().catch(() => {}); }
 
 audio.addEventListener('ended', nextTrack);
-
 audio.addEventListener('timeupdate', () => {
   if (!audio.duration) return;
-  const pct = (audio.currentTime / audio.duration) * 100;
-  document.getElementById('music-progress-fill').style.width = pct + '%';
+  const p = (audio.currentTime / audio.duration) * 100;
+  document.getElementById('music-progress-fill').style.width = p + '%';
   document.getElementById('music-time-cur').textContent = formatTime(audio.currentTime);
   document.getElementById('music-time-dur').textContent = formatTime(audio.duration);
 });
@@ -1704,6 +1748,190 @@ function toggleMusicPanel() {
 buildPlaylist();
 loadTrack(0);
 
+/* ═══════════════════════════════════════════════════════
+   WIDGET SOLEIL / LUNE — CALENDRIER FICTIF
+   Point d'ancrage : 20 Févrisson 7060 = 20 février 2025
+═══════════════════════════════════════════════════════ */
+const GA_MONTHS = [
+  "Janvrioche","Févrisson","Marsipulars","Avrilusion",
+  "Maïou","Juindigo","Juilorage","Aoûtomne",
+  "Septembreuil","Octembre","Novembrune","Décembilions"
+];
+
+const GA_DAYS_IN_MONTH = [31,28,31,30,31,30,31,31,30,31,30,31];
+
+/* Ancrage : 20 Févrisson 7060 = 20 février 2025 */
+const GA_REAL_EPOCH  = new Date(2025, 1, 20);
+const GA_FICT_EPOCH  = { day: 20, month: 1, year: 7060 };
+
+function gaGetDaysInMonth(month, year) {
+  const base = GA_DAYS_IN_MONTH[month];
+  if (month === 1) {
+    const realYear = year - GA_FICT_EPOCH.year + 2025;
+    if ((realYear % 4 === 0 && realYear % 100 !== 0) || realYear % 400 === 0) return 29;
+  }
+  return base;
+}
+
+function gaGetFictiveDate(realDate) {
+  const msPerDay = 86400000;
+  const realMid  = new Date(realDate.getFullYear(), realDate.getMonth(), realDate.getDate());
+  const epochMid = new Date(GA_REAL_EPOCH.getFullYear(), GA_REAL_EPOCH.getMonth(), GA_REAL_EPOCH.getDate());
+  const diffDays = Math.round((realMid - epochMid) / msPerDay);
+
+  let day   = GA_FICT_EPOCH.day + diffDays;
+  let month = GA_FICT_EPOCH.month;
+  let year  = GA_FICT_EPOCH.year;
+
+  while (day > gaGetDaysInMonth(month, year)) {
+    day -= gaGetDaysInMonth(month, year);
+    month++;
+    if (month > 11) { month = 0; year++; }
+  }
+  while (day < 1) {
+    month--;
+    if (month < 0) { month = 11; year--; }
+    day += gaGetDaysInMonth(month, year);
+  }
+  return { day, month, year };
+}
+
+function gaGetIcon(h) {
+  if (h >= 20 || h < 6)  return '🌙';
+  if (h >= 6  && h < 8)  return '🌅';
+  if (h >= 18 && h < 20) return '🌇';
+  return '☀️';
+}
+
+function gaGetAtmosphere(h) {
+  if (h >= 20 || h < 6)  return 'La nuit enveloppe le monde';
+  if (h >= 6  && h < 8)  return 'L\'aube se lève sur les royaumes';
+  if (h >= 18 && h < 20) return 'Le crépuscule descend sur l\'univers';
+  return 'Le soleil règne sur les terres';
+}
+
+let gaPanelOpen = false;
+let gaMiniViewMonth, gaMiniViewYear;
+
+function toggleGaPanel() {
+  gaPanelOpen = !gaPanelOpen;
+  const panel = document.getElementById('ga-panel');
+  if (gaPanelOpen) {
+    panel.classList.add('open');
+    gaRenderMini();
+  } else {
+    panel.classList.remove('open');
+  }
+}
+
+function gaUpdateWidget() {
+  const now  = new Date();
+  const h    = now.getHours();
+  const mins = now.getMinutes().toString().padStart(2, '0');
+  const secs = now.getSeconds().toString().padStart(2, '0');
+  const icon = gaGetIcon(h);
+  const fd   = gaGetFictiveDate(now);
+
+  /* Orbe */
+  document.getElementById('ga-orb-icon').textContent = icon;
+
+  /* Heure réelle */
+  document.getElementById('ga-real-icon').textContent = icon;
+  document.getElementById('ga-real-clock').textContent = `${h}:${mins}:${secs}`;
+
+  const jours = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+  const moisFR = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+  document.getElementById('ga-real-date-label').textContent =
+    `${jours[now.getDay()]} ${now.getDate()} ${moisFR[now.getMonth()]} ${now.getFullYear()}`;
+
+  /* Date fictive */
+  const dowReal = now.getDay();
+  const joursReal = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+  document.getElementById('ga-fictive-date').textContent =
+    `${joursReal[dowReal]} ${fd.day} ${GA_MONTHS[fd.month]} ${fd.year}`;
+  document.getElementById('ga-fictive-sub').textContent = gaGetAtmosphere(h);
+}
+
+function gaRenderMini() {
+  const now  = new Date();
+  const fd   = gaGetFictiveDate(now);
+  if (gaMiniViewMonth === undefined) {
+    gaMiniViewMonth = fd.month;
+    gaMiniViewYear  = fd.year;
+  }
+
+  document.getElementById('ga-mini-month-name').textContent =
+    GA_MONTHS[gaMiniViewMonth] + ' ' + gaMiniViewYear;
+
+  const daysInM = gaGetDaysInMonth(gaMiniViewMonth, gaMiniViewYear);
+
+  /* Trouver le 1er jour du mois fictif en calculant le jour réel correspondant */
+  const todayFd = gaGetFictiveDate(now);
+  const diffFromToday =
+    (gaMiniViewYear - todayFd.year) * 365 +
+    (gaMiniViewMonth - todayFd.month) * 30 +
+    (1 - todayFd.day);
+
+  const firstRealDate = new Date(now);
+  firstRealDate.setDate(now.getDate() + diffFromToday);
+
+  let firstDow = firstRealDate.getDay();
+  if (firstDow === 0) firstDow = 7;
+  firstDow--;
+
+  let cells = [];
+  for (let i = 0; i < firstDow; i++) cells.push(null);
+  for (let d = 1; d <= daysInM; d++) cells.push(d);
+  while (cells.length % 7 !== 0) cells.push(null);
+
+  const tbody = document.getElementById('ga-mini-body');
+  tbody.innerHTML = '';
+
+  for (let r = 0; r < cells.length / 7; r++) {
+    const tr = document.createElement('tr');
+    for (let c = 0; c < 7; c++) {
+      const day = cells[r * 7 + c];
+      const td  = document.createElement('td');
+      const div = document.createElement('div');
+      div.className = 'ga-mini-day';
+
+      const isToday =
+        day &&
+        day === fd.day &&
+        gaMiniViewMonth === fd.month &&
+        gaMiniViewYear  === fd.year;
+
+      const isWeekend = (c === 5 || c === 6);
+
+      if (!day) {
+        div.className += ' empty';
+        div.textContent = '';
+      } else {
+        if (isToday)       div.className += ' today';
+        else if (isWeekend) div.className += ' weekend';
+        div.textContent = day;
+      }
+      td.appendChild(div);
+      tr.appendChild(td);
+    }
+    tbody.appendChild(tr);
+  }
+}
+
+function gaMiniNav(dir) {
+  gaMiniViewMonth += dir;
+  if (gaMiniViewMonth > 11) { gaMiniViewMonth = 0; gaMiniViewYear++; }
+  if (gaMiniViewMonth < 0)  { gaMiniViewMonth = 11; gaMiniViewYear--; }
+  gaRenderMini();
+}
+
+/* Démarrage widget */
+gaUpdateWidget();
+setInterval(() => {
+  gaUpdateWidget();
+  if (gaPanelOpen) gaRenderMini();
+}, 1000);
+
 /* ─── KEYBOARD ESC ─── */
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
@@ -1711,6 +1939,7 @@ document.addEventListener('keydown', e => {
       m.classList.remove('open');
       document.body.style.overflow = '';
     });
+    if (gaPanelOpen) { gaPanelOpen = false; document.getElementById('ga-panel').classList.remove('open'); }
   }
 });
 </script>
