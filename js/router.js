@@ -39,7 +39,34 @@ function executePageScripts(container) {
     oldScript.replaceWith(newScript);
   });
 }
+function convertInternalLinks(container) {
+  const aliases = {
+    "index.html": "accueil",
+    "accueil.html": "accueil",
+    "magie.html": "magie",
+    "chronologie.html": "chronologie",
+    "race.html": "race",
+    "unité.html": "unite",
+    "unite.html": "unite",
+    "creation-personnage.html": "creation"
+  };
 
+  container.querySelectorAll("a[href]").forEach(link => {
+    const href = link.getAttribute("href");
+
+    if (!href) return;
+    if (href.startsWith("http")) return;
+    if (href.startsWith("mailto:")) return;
+    if (href.startsWith("#")) return;
+
+    const page = href.split("#")[0];
+    const anchor = href.includes("#") ? "#" + href.split("#")[1] : "";
+
+    if (aliases[page]) {
+      link.setAttribute("href", "#/" + aliases[page] + anchor);
+    }
+  });
+}
 async function loadRoute(route) {
   const file = routes[route] || routes.accueil;
 
