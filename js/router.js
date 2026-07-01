@@ -9,17 +9,51 @@ const routes = {
 
 const app = document.querySelector("#app");
 
+let styleContainer = document.querySelector("#page-styles");
+
+if (!styleContainer) {
+  styleContainer = document.createElement("div");
+  styleContainer.id = "page-styles";
+  document.head.appendChild(styleContainer);
+}
+
 async function loadRoute(route) {
   const file = routes[route] || routes.accueil;
 
-  const response = await fetch(file);
-  const html = await response.text();
+  try {
+    const response = await fetch(file);
 
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(html, "text/html");
+    if (!response.ok) {
+      throw new Error("Page introuvable : " + file);
+    }
 
-  app.innerHTML = doc.body.innerHTML;
-  window.scrollTo(0, 0);
+    const html = await response.text();
+
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+
+    styleContainer.innerHTML = "";
+
+    doc.head.querySelectorAll("style, link[rel='stylesheet']").forEach(style => {
+      styleContainer.appendChild(style.cloneNode(true));
+    });
+
+    app.innerHTML = doc.body.innerHTML;
+
+    document.querySelectorAll("[data-route]").forEach(link => {
+      link.classList.toggle("active", link.dataset.route === route);
+    });
+
+    window.scrollTo(0, 0);
+  } catch (error) {
+    console.error(error);
+    app.innerHTML = `
+      <section style="padding:40px;color:white;">
+        <h1>Erreur</h1>
+        <p>${error.message}</p>
+      </section>
+    `;
+  }
 }
 
 function getRoute() {
