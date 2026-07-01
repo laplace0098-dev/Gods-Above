@@ -1,21 +1,39 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gods Above</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Raleway:wght@300;400;500;600&family=Cinzel+Decorative:wght@400;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/global.css" />
 </head>
 <body>
-  <nav>
-    <a href="#/accueil" data-route="accueil">Accueil</a>
-    <a href="#/magie" data-route="magie">Magie</a>
-    <a href="#/chronologie" data-route="chronologie">Chronologie</a>
-    <a href="#/race" data-route="race">Races</a>
-    <a href="#/unite" data-route="unite">Unités</a>
-    <a href="#/creation" data-route="creation">Création</a>
+  <nav class="site-nav">
+    <a href="#/accueil" class="nav-logo" data-route="accueil">GODS ABOVE</a>
+    <ul class="nav-links">
+      <li><a href="#/accueil" data-route="accueil">Accueil</a></li>
+      <li><a href="#/magie" data-route="magie">Magie</a></li>
+      <li><a href="#/race" data-route="race">Race</a></li>
+      <li><a href="#/chronologie" data-route="chronologie">Chronologie</a></li>
+      <li><a href="#/unite" data-route="unite">Unité</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="#/creation" class="nav-btn nav-btn-outline" data-route="creation">Créer mon OC</a>
+    </div>
   </nav>
 
-  <main id="app"></main>
+  <main id="ga-app"></main>
+
+  <div class="music-player" aria-label="Lecteur musical">
+    <audio id="ga-audio"></audio>
+    <button id="ga-play" type="button">Play</button>
+    <button id="ga-next" type="button">Suivant</button>
+    <span id="ga-track-title">Aucune musique</span>
+    <input id="ga-volume" type="range" min="0" max="1" step="0.01" value="0.45" aria-label="Volume" />
+  </div>
 
   <script src="js/router.js"></script>
+  <script src="js/player.js"></script>
 </body>
 </html>
