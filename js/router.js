@@ -90,6 +90,7 @@ async function loadRoute(route) {
 
     app.innerHTML = doc.body.innerHTML;
 
+    convertInternalLinks(app);
     executePageScripts(app);
     setActiveLink(route);
 
