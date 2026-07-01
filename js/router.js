@@ -17,6 +17,29 @@ if (!styleContainer) {
   document.head.appendChild(styleContainer);
 }
 
+function getRoute() {
+  return location.hash.replace("#/", "") || "accueil";
+}
+
+function setActiveLink(route) {
+  document.querySelectorAll("[data-route]").forEach(link => {
+    link.classList.toggle("active", link.dataset.route === route);
+  });
+}
+
+function executePageScripts(container) {
+  container.querySelectorAll("script").forEach(oldScript => {
+    const newScript = document.createElement("script");
+
+    [...oldScript.attributes].forEach(attr => {
+      newScript.setAttribute(attr.name, attr.value);
+    });
+
+    newScript.textContent = oldScript.textContent;
+    oldScript.replaceWith(newScript);
+  });
+}
+
 async function loadRoute(route) {
   const file = routes[route] || routes.accueil;
 
@@ -40,24 +63,20 @@ async function loadRoute(route) {
 
     app.innerHTML = doc.body.innerHTML;
 
-    document.querySelectorAll("[data-route]").forEach(link => {
-      link.classList.toggle("active", link.dataset.route === route);
-    });
+    executePageScripts(app);
+    setActiveLink(route);
 
     window.scrollTo(0, 0);
   } catch (error) {
     console.error(error);
+
     app.innerHTML = `
-      <section style="padding:40px;color:white;">
+      <section style="padding:40px;color:white;font-family:Arial,sans-serif;">
         <h1>Erreur</h1>
         <p>${error.message}</p>
       </section>
     `;
   }
-}
-
-function getRoute() {
-  return location.hash.replace("#/", "") || "accueil";
 }
 
 window.addEventListener("hashchange", () => {
